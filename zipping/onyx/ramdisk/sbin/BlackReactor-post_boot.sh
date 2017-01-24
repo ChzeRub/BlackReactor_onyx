@@ -3,6 +3,14 @@
 echo "[BlackReactor-Kernel] Boot Script Started" | tee /dev/kmsg
 
 
+echo 1 > /sys/devices/system/cpu/cpu1/online
+echo 1 > /sys/devices/system/cpu/cpu2/online
+echo 1 > /sys/devices/system/cpu/cpu3/online
+echo "reactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo "reactive" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+echo "reactive" > /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor
+echo "reactive" > /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor
+echo "[BlackReactor-Kernel] Reactive Activated" | tee /dev/kmsg
 # set msm_mpdecision parameters
 echo 45000 > /sys/module/msm_mpdecision/slack_time_max_us
 echo 15000 > /sys/module/msm_mpdecision/slack_time_min_us
@@ -15,7 +23,7 @@ echo 2 > /sys/module/msm_mpdecision/rq_avg_poll_ms
 echo 10 > /sys/module/msm_mpdecision/mp_em_rounding_point_min
 echo 85 > /sys/module/msm_mpdecision/mp_em_rounding_point_max
 echo 50 > /sys/module/msm_mpdecision/iowait_threshold_pct
-
+echo 2 > /sys/module/msm_mpdecision/min_cpus
 setprop ro.qualcomm.perf.cores_online 2
 
 echo "Success" > /data/BlackReactor/test.log
